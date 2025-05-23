@@ -5,56 +5,40 @@
     <meta charset="UTF-8">
     <title>Register - PeakDay</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <style>
-        body {
-            background: #f8f9fa;
-        }
-        .card {
-            border: none;
-            border-radius: 1rem;
-        }
-        .form-control {
-            border-radius: 0.5rem;
-        }
-    </style>
 </head>
-<body>
+<body class="bg-light">
 
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card shadow-lg p-4 bg-white">
-                <h3 class="text-center mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
-                         class="bi bi-person-plus" viewBox="0 0 16 16">
-                        <path
-                            d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM2 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H2zm11-5.5a.5.5 0 0 1 .5.5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 .5-.5z"/>
-                    </svg>
-                    Create an Account
-                </h3>
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">Create an Account</h2>
 
-                <form method="POST" novalidate>
-                    {% csrf_token %}
-                    {% for field in form %}
-                        <div class="mb-3">
-                            {{ field.label_tag }} {{ field }}
-                            {% if field.errors %}
-                                <div class="text-danger small">{{ field.errors|striptags }}</div>
-                            {% endif %}
+                    <form method="POST" novalidate>
+                        {% csrf_token %}
+                        {% for field in form %}
+                            <div class="mb-3">
+                                <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    <div class="text-danger small">{{ field.errors|striptags }}</div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                        <button type="submit" class="btn btn-primary w-100">Register</button>
+                    </form>
+
+                    {% if form.errors %}
+                        <div class="alert alert-danger mt-3">
+                            ❌ Please correct the errors below.
                         </div>
-                    {% endfor %}
-                    <button type="submit" class="btn btn-primary w-100">Register</button>
-                </form>
+                    {% endif %}
 
-                {% if form.errors %}
-                    <div class="alert alert-danger mt-3">
-                        ❌ Please correct the errors above.
+                    <div class="text-center mt-3">
+                        <a href="{% url 'login' %}" class="btn btn-link">Already have an account? Log in</a><br>
+                        <a href="{% url 'mainpage:home' %}" class="btn btn-link">← Back to Home</a>
                     </div>
-                {% endif %}
-
-                <div class="text-center mt-3">
-                    <a href="{% url 'login' %}" class="btn btn-link">Already have an account? Log in</a><br>
-                    <a href="{% url 'mainpage:home' %}" class="btn btn-link">← Back to Home</a>
                 </div>
             </div>
         </div>
