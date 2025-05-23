@@ -9,4 +9,3 @@ services:
         value: peakday.settings
       - key: PYTHON_VERSION
         value: "3.11.8"
-    staticPublishPath: /static
