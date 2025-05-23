@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: peakday
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn peakday.wsgi:application"
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: peakday.settings
+      - key: PYTHON_VERSION
+        value: "3.11.8"
+    staticPublishPath: /static
